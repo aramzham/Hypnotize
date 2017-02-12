@@ -8,10 +8,18 @@ namespace Hipnotizer
     {
         public int[][] CreateMatrix(int n)
         {
+            var matrix = new int[n][];
             var r = new Random((int) DateTime.Now.Ticks);
-            
+            for (int i = 0; i < n; i++)
+            {
+                matrix[i] = new int[n];
+                for (int j = 0; j < n; j++)
+                {
+                    matrix[i][j] = r.Next(0, 10);
+                }
+            }
+            return matrix;
         }
-
         public static int[][] Start(int[][] matrix)
         {
             var contours = new List<List<int>>();
@@ -90,11 +98,11 @@ namespace Hipnotizer
             }
             return result;
         }
-        private List<int> LeftShift(List<int> list)
+        private static List<int> LeftShift(List<int> list)
         {
             return list.Skip(1).Concat(list.Take(1)).ToList();
         }
-        private List<int> RightShift(List<int> list)
+        private static List<int> RightShift(List<int> list)
         {
             return list.Skip(list.Count - 1).Concat(list.Take(list.Count - 1)).ToList();
         }
